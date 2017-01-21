@@ -89,13 +89,13 @@ public class GA {
             Candidate child1, child2;
 
             // Method one-point crossover random pivot
-            //int pivot = rand.nextInt(GENESIZE-2) + 1; // cut interval is 1 .. size-1		
-            //child1 = newChildRandomPivot(w1,w2,pivot);
-            //child2 = newChildRandomPivot(w2,w1,pivot);
+            int pivot = GENESIZE/2;      // select the midpoint of the gene for crossover		
+            child1 = newChildFixedPivot(winner1, winner2, pivot);
+            child2 = newChildFixedPivot(winner2, winner1, pivot);
             // Method uniform crossover
-            Candidate[] childs = GA.this.newChildRandomPivot(winner1, winner2);
-            child1 = childs[0];
-            child2 = childs[1];
+            //Candidate[] children = GA.this.newChildRandomPivot(winner1, winner2);
+            //child1 = children[0];
+            //child2 = children[1];
 
             boolean m1 = rand.nextFloat() <= mutatePercent;
             boolean m2 = rand.nextFloat() <= mutatePercent;
@@ -139,7 +139,7 @@ public class GA {
         return child;
     }
     /*
-     * one-point crossover with a random pivot point
+     * Randomly swap genes between the two candidates.
      */ 
     Candidate[] newChildRandomPivot(Candidate c1, Candidate c2) {
         Candidate child1 = new Candidate();
